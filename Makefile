@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.10 2017/04/08 17:50:33 schmonz Exp $
+# $NetBSD: Makefile,v 1.13 2020/06/25 05:42:38 schmonz Exp $
 #
 
 DISTNAME=		serialmail-0.75
@@ -7,7 +7,7 @@ CATEGORIES=		mail
 MASTER_SITES=		http://cr.yp.to/software/
 
 MAINTAINER=		schmonz@NetBSD.org
-HOMEPAGE=		http://cr.yp.to/serialmail.html
+HOMEPAGE=		https://cr.yp.to/serialmail.html
 COMMENT=		Tools for passing mail across serial links
 
 DEPENDS+=		qmail>=1.03nb7:../../mail/qmail
@@ -18,12 +18,12 @@ INSTALLATION_DIRS=	share/doc/${PKGBASE}
 # provide compatibility symlinks. We also apply patches.
 DJB_RESTRICTED=		YES
 
-SUBST_FILES.djbware+=	leapsecs_read.c
+SUBST_CLASSES+=		djberrno
 
 SUBST_CLASSES+=		paths
 SUBST_STAGE.paths=	do-configure
 SUBST_FILES.paths=	hier.c
-SUBST_SED.paths=	-e 's,@PKGMANDIR@,${PKGMANDIR},g'
+SUBST_VARS.paths=	PKGMANDIR
 
 .include "../../mk/djbware.mk"
 .include "../../mk/bsd.pkg.mk"
